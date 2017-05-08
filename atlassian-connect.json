@@ -2,7 +2,7 @@
     "key": "confluence-specif-importer",
     "name": "Confluence SpecIF-Importer",
     "description": "Imports any SpecIF formatted data.",
-    "baseUrl": "https://github.com/GfSE/SpecIF-to-Confluence-Importer",
+    "baseUrl": "https://github.com/GfSE/SpecIF-to-Confluence-Importer/blob/master",
     "vendor": {
         "name": "Marcus Bätz"
     },
