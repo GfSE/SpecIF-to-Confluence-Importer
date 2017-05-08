@@ -1,0 +1,59 @@
+#main{
+    display: none;
+    flex-direction: row;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+#page{
+    flex: 1 0 30%;
+    padding: 2%;
+    display: inline-block;
+    line-height: 30px;
+    background-color: rgba(255, 255, 255, .9);
+    border: 1px solid #cccccc;
+    box-shadow: rgba(128, 128, 128, 0.498039) 3px 3px 10px;
+    z-index: 100;
+}
+#Side-bar{
+    width: 50%;
+    display: inline-block;
+    flex: 1 0 20%;
+    padding: 2%;
+}
+
+#upload-log{
+    border: 1px solid lightgray;
+    height:140px;
+    overflow: hidden;
+    visibility: hidden;
+}
+#upload-message{
+    font-size: 20px;
+}
+
+.progress-bar, .progress-amount{
+    border-radius: 5px;
+    height: 20px;
+}
+.progress-bar{
+    margin-top: 5%;
+    border: 1px solid lightgray;
+    width: 100%;
+    visibility: hidden;
+}
+.progress-amount{
+    border: 0 solid lightgray;
+    width: 0;
+    background-color:  lightgray;
+}
+#clear-ffi{
+    display:none
+}
+#label-ffi[aria-disabled="true"]::after {
+    background-color: #f5f5f5;
+    color:#999;
+}
+.flag{
+    margin-left: 45%;
+}

@@ -1,0 +1,71 @@
+<!--The template for the menu-->
+<script type="x/template" id="menu-template">
+    <h2><%= MENU_TITLE %></h2>
+    <form action="#" method="post" id="upload-form" class="aui">
+        <h3><%= MENU_HEADING_SELECT_SPACE %></h3>
+        <div class="field-group">
+            <label for="dropdown-spaces"><%= MENU_LABEL_MY_SPACES %></label>
+            <select class="select" id="dropdown-spaces" name="dropdown-spaces" title="space select">
+            </select>
+        </div>
+        <h3><%= MENU_HEADING_CREATE_SPACE %></h3>
+        <div class="field-group">
+            <label for="space-title"><%= MENU_LABEL_SPACE_TITLE %><span class="aui-icon icon-required">
+    required</span></label>
+            <input class="text" type="text" id="space-title" name="space-title" title="space title">
+
+            <div class="error hidden"></div>
+            <div class="description"><%= MENU_DESCRIPTION_SPACE_TITLE %></div>
+        </div>
+        <div class="field-group">
+            <label for="space-key"><%= MENU_LABEL_SPACE_KEY %><span class="aui-icon icon-required">
+    required</span></label>
+            <input class="text" type="text" id="space-key" name="space-key" title="space key">
+            <div class="error hidden"></div>
+            <div class="description"><%= MENU_DESCRIPTION_SPACE_KEY %></div>
+        </div>
+        <h3>File upload</h3>
+        <fieldset>
+            <div class="field-group">
+                <label for="file-chooser" aria-disabled="false"><%= MENU_LABEL_SPECIFZ_FILE %><span class="aui-icon icon-required">
+    required</span></label>
+                <label id="label-ffi" class="ffi" data-ffi-button-text="<%= MENU_FILE_CHOOSER_BUTTON %>" data-ffi-value="">
+                    <input class="upfile" type="file" id="file-chooser" name="file-chooser" accept=".specifz"
+                           aria-label="file chooser">
+                    <button id="clear-ffi" class="ffi-clear" type="button" tabindex="-1">Clear</button>
+                </label>
+                <div class="error hidden"></div>
+                <div class="description"><%= MENU_DESCRIPTION_SPECIFZ_FILE %></div>
+            </div>
+        </fieldset>
+        <fieldset class="group">
+            <legend><span><%= MENU_LABEL_UPLOAD_TYPE %></span></legend>
+            <div class="radio">
+                <input class="radio" type="radio" checked="checked"
+                       name="radiobuttons" id="radioButtonReplace">
+                <label for="radioButtonReplace"><%= MENU_RADIO_BUTTON_UPLOAD_TYPE_REPLACE%></label>
+            </div>
+            <div class="radio">
+                <input class="radio" type="radio"
+                       name="radiobuttons" id="radioButtonClone">
+                <label for="radioButtonClone"><%= MENU_RADIO_BUTTON_UPLOAD_TYPE_CLONE%></label>
+            </div>
+            <div class="radio">
+                <input class="radio" type="radio"
+                       name="radiobuttons" id="radioButtonUpdate">
+                <label for="radioButtonUpdate"><%= MENU_RADIO_BUTTON_UPLOAD_TYPE_UPDATE%></label>
+            </div>
+        </fieldset>
+        <div class="buttons-container">
+            <div class="buttons">
+                <button id="loadData" class="aui-button aui-button-primary" resolved="" type=button
+                        aria-disabled="false"><%= MENU_BUTTON_UPLOAD %>
+                </button>
+                <button id="link-button" class="aui-button aui-button-link" resolved="">
+                    <a class=external-link" href="" id="space-link" target="_blank"></a>
+                </button>
+            </div>
+        </div>
+        <br/><br/><br/>
+    </form>
+</script>

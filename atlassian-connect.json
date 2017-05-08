@@ -1,0 +1,43 @@
+{
+    "key": "confluence-specif-importer",
+    "name": "Confluence SpecIF-Importer",
+    "description": "Imports any SpecIF formatted data.",
+    "baseUrl": "https://github.com/GfSE/SpecIF-to-Confluence-Importer",
+    "vendor": {
+        "name": "Marcus Bätz"
+    },
+    "authentication": {
+        "type": "none"
+    },
+    "version": "0.1",
+    "modules": {
+        "generalPages": [
+            {
+                "key": "specif-importer",
+                "url": "/index.html?spaceKey={space.key}",
+                "location": "system.dashboard",
+                "name": {
+                    "value": "Confluence SpecIF-Importer"
+                }
+            }
+        ],
+        "dynamicContentMacros": [
+            {
+                "width": "100%",
+                "height": "500px",
+                "key": "specif-graph",
+                "url": "/graph.html?pageID={page.id}",
+                "name": {
+                    "value": "Confluence SpecIF-Graph"
+                }
+            }
+        ]
+    },
+
+    "scopes": [
+        "read",
+        "write",
+        "delete"
+    ]
+}
+
