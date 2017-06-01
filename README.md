@@ -13,14 +13,10 @@ Also there is a integrate network plugin that will represent all relations of an
 To use the plugin on confluence you have to provide the files in the internet and update the atlassian-connect.json with your url to this folder.
 
 ```json
-  .
-  .
-  .
+  ...
     "description": "Imports any SpecIF formatted data.",
     "baseUrl": "<YOUR_URL>"
      "vendor": {
-  .
-  .
-  .   
+  ...  
 ```
 After this, as admin in confluence go to Administration -> Add-ons -> choose Upload add-on and paste <YOUR_URL> + atlassian-connect.json in the url field and begin the upload. Now you can go to the Dashboard by clicking on Confluence and you can see the button on the right lower side. 
