@@ -1,6 +1,6 @@
 # SpecIF-to-Confluence-Importer
-A plugin importing SpecIF data to Confluence in the Atlassian Connect Environment. A page is created per SpecIF object; the attributes and relations are appended.
-Also there is a integrate network plugin that will represent all relations of an Object as an interactive network.
+A plugin importing SpecIF data to Confluence in the Atlassian Connect Environment. Per SpecIF object a Confluence page is created; the attributes and relations are appended.
+An integrated graphing plugin represents all relations of an Object as an interactive network.
  
 ## Setup
 
@@ -21,3 +21,4 @@ Then, as admin in Confluence go to Administration -> Add-ons -> choose Upload ad
  + When using IE11, the nodes of the graph network are not linked to the pages of the node objects.
  + After uploading the SpecIF content to a new Confluence space, this space will not show up in the list of last spaces. The first time the created space has to be selected manually from the spaces directory or with the link shown the plugin (except IE11).
  + The Confluence architecture does not allow to use the same page as child of multiple other pages. Therefore, for each reference of an object in the SpecIF hierarchy a separate copy is created. 
+ + The SpecIF type information is used to optimally display the content, but is lost as such.
