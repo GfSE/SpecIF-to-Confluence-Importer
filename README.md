@@ -22,3 +22,6 @@ Then, as admin in Confluence go to Administration -> Add-ons -> choose Upload ad
  + After uploading the SpecIF content to a new Confluence space, this space will not show up in the list of last spaces. The first time the created space has to be selected manually from the spaces directory or with the link shown the plugin (except IE11).
  + The Confluence architecture does not allow to use the same page as child of multiple other pages. Therefore, for each reference of an object in the SpecIF hierarchy a separate copy is created. 
  + The SpecIF type information is used to optimally display the content, but is lost as such.
+
+## Acknowledgements
+This work has been sponsored by [adesso AG](http://adesso.de), Berlin.
