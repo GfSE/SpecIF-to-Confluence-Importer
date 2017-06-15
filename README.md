@@ -3,7 +3,7 @@
 A plugin importing SpecIF data to Confluence in the Atlassian Connect Environment. A page is created per SpecIF object; the attributes and relations are appended.
 Also there is a integrate network plugin that will represent all relations of an Object as an interactive network.
  
- ![Example](/Example.jpg)
+ ![Example](Example.JPG)
  
 ## Setup
 
