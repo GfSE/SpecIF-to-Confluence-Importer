@@ -2,7 +2,7 @@
     "key": "confluence-specif-importer",
     "name": "Confluence SpecIF-Importer",
     "description": "Imports any SpecIF formatted data.",
-    "baseUrl": "",
+    "baseUrl": "https://9ed45467.ngrok.io",
     "vendor": {
         "name": "Marcus Bätz"
     },
