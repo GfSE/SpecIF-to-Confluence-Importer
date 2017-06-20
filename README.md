@@ -1,7 +1,6 @@
 # SpecIF-to-Confluence-Importer
 
-A plugin importing SpecIF data to Confluence in the Atlassian Connect Environment. A page is created per SpecIF object; the attributes and relations are appended.
-Also there is a integrate network plugin that will represent all relations of an Object as an interactive network.
+A plugin importing SpecIF data to Confluence in the Atlassian Connect Environment. A page is created per SpecIF object; the attributes'  content and the relations are appended. In addition, all relations of the selected object are displayed in a graph; navigate to a related object by clicking on it's node.
  
  ![Example](Example.JPG)
  
