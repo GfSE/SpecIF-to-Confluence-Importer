@@ -261,7 +261,7 @@ define([
         }
 
         /**
-         *Rests the form. Called after successful upload
+         *Resets the form. Called after successful upload
          */
         function reset() {
             isOwnKey = false;
@@ -269,17 +269,16 @@ define([
             $('#space-key').val("");
             $('#space-title').val("");
             clearSelectedSpecIFZFile.call($('#clear-ffi'));
-            progress = 0;
+            progress = 0
         }
 
         /**
          * Removes the selected file from the form.
          */
         function clearSelectedSpecIFZFile() {
-
             $(this).css("display", "none");
             $('#file-chooser').val("");
-            $(this).parent().attr("data-ffi-value", "");
+            $(this).parent().attr("data-ffi-value", "")
         }
 
         /**
@@ -291,7 +290,7 @@ define([
             else  $('#clear-ffi').css("display", "none");
             if (!path) return;
             validatePath(path);
-            $(this).parent().attr("data-ffi-value", path.substr(path.lastIndexOf("/") + 1));
+            $(this).parent().attr("data-ffi-value", path.substr(path.lastIndexOf("/") + 1))
         }
 
         /**
@@ -301,7 +300,7 @@ define([
             isOwnKey = true;
             let $option = $($(this)[0][$(this)[0].selectedIndex]);
             $('#space-title').val($option.text());
-            $('#space-key').val($option.attr("value"));
+            $('#space-key').val($option.attr("value"))
         }
 
         /**
@@ -311,9 +310,9 @@ define([
          */
         function validatePath(path) {
             if (path === "") {
-                return validationError($('#file-chooser').parent().parent().children(".error"), i18n.EMPTY_PATH);
+                return validationError($('#file-chooser').parent().parent().children(".error"), i18n.EMPTY_PATH)
             } else if (!path.includes(".specifz")) {
-                return validationError($('#file-chooser').parent().parent().children(".error"), i18n.NO_SPECIFZ_FILE);
+                return validationError($('#file-chooser').parent().parent().children(".error"), i18n.NO_SPECIFZ_FILE)
             } else {
                 return hideError($('#file-chooser').parent().parent().children(".error"))
             }
@@ -326,13 +325,11 @@ define([
         function validateTitle() {
             if ($(this).val()) {
                 if (!isOwnKey) generateKey();
-                return hideError($(this).parent().children(".error"));
+                return hideError($(this).parent().children(".error"))
             }
             else {
                 $('#space-key').val("");
-                return validationError($(this).parent().children(".error"), i18n.EMPTY_TITLE_MESSAGE);
-
-
+                return validationError($(this).parent().children(".error"), i18n.EMPTY_TITLE_MESSAGE)
             }
         }
 
@@ -343,9 +340,9 @@ define([
         function validateKey() {
             if ($(this).val()) {
                 if ($(this).val().match(/^[A-Za-z0-9]*$/)) return hideError($(this).parent().children(".error"));
-                else return validationError($(this).parent().children(".error"), i18n.KEY_VALIDATION_MESSAGE);
+                else return validationError($(this).parent().children(".error"), i18n.KEY_VALIDATION_MESSAGE)
             }
-            else  return validationError($(this).parent().children(".error"), i18n.EMPTY_KEY_MESSAGE);
+            else  return validationError($(this).parent().children(".error"), i18n.EMPTY_KEY_MESSAGE)
         }
 
         /**
@@ -356,9 +353,9 @@ define([
         function hideError($error) {
             if ($error) {
                 $error.addClass("hidden");
-                $error.text("");
-            }
-            return true;
+                $error.text("")
+            };
+            return true
         }
 
         /**
@@ -371,8 +368,8 @@ define([
             if ($error) {
                 $error.removeClass("hidden");
                 $error.text(message);
-            }
-            return false;
+            };
+            return false
         }
 
         /**
@@ -385,14 +382,13 @@ define([
                 if ($field.val().includes(" ")) {
                     let parts = $field.val().split(" ");
                     parts.forEach(function (entry) {
-                        if (entry.length > 0 && entry[0].match(/[A-Za-z0-9äöüÄÖÜ]/)) key += entry[0].toUpperCase();
-                    });
+                        if (entry.length > 0 && entry[0].match(/[A-Za-z0-9äöüÄÖÜ]/)) key += entry[0].toUpperCase()
+                    })
                 } else {
                     for (let i = 0; i < $field.val().length; i++)
-                        if ($field.val()[i].match(/[A-Za-z0-9äöüÄÖÜ]/)) key += $field.val()[i].toUpperCase();
-
-                }
-                $('#space-key').val(key.replace("Ä", "A").replace("Ö", "O").replace("Ü", "U"));
+                        if ($field.val()[i].match(/[A-Za-z0-9äöüÄÖÜ]/)) key += $field.val()[i].toUpperCase()
+                };
+                $('#space-key').val(key.replace("Ä", "A").replace("Ö", "O").replace("Ü", "U"))
             }
         }
 
@@ -400,8 +396,7 @@ define([
          * Sets the value for maxProgress.
          */
         function setProgress() {
-            maxProgress = specif.getHierarchieNodesSize(specif.getRoot()) - 1;
-
+            maxProgress = specif.getHierarchieNodesSize(specif.getRoot()) - 1
         }
 
         /**
@@ -411,7 +406,6 @@ define([
             //TODO not finished. Criteria not defined
             setProgress();
             let root = specif.getRoot();
-
 
             data.getSpace(space.key, function (response) {
                 if (isCanceled)return;
@@ -432,9 +426,8 @@ define([
             }, function (err) {
                 if (isCanceled)return;
                 if (err.status === 404) error(i18n.NO_SPACE_AVAILABLE);
-                else error(err);
-
-            });
+                else error(err)
+            })
         }
 
         /**
@@ -444,21 +437,17 @@ define([
             setProgress();
             let root = specif.getRoot();
 
-
             data.removeSpace(space.key, function (success) {
                 waitForCompleteDeletion(JSON.parse(success).links.status,
                     function () {
                         if (isCanceled)return;
                         createNewSpace(root);
-                    });
-
-
+                    })
             }, function (err) {
                 if (isCanceled)return;
                 if (err.status === 404) createNewSpace(root);
-                else error(err);
-
-            });
+                else error(err)
+            })
         }
 
         /**
@@ -471,8 +460,8 @@ define([
             data.waitForCompleteDeletion(url, function (response) {
                 if (isCanceled)return;
                 if (JSON.parse(response).successful) callback();
-                else setTimeout(waitForCompleteDeletion(url, callback), 1000);
-            });
+                else setTimeout(waitForCompleteDeletion(url, callback), 1000)
+            })
         }
 
         /**
@@ -493,8 +482,7 @@ define([
                 AJS.$('.button-spinner').hide();
                 AJS.$('#progress-bar').show();
                 setUploadMessage(i18n.UPLOADING, "generic");
-            }, error);
-
+            }, error)
         }
 
         /**
@@ -517,11 +505,10 @@ define([
                             file: new File([value], name, {type: getImageTypeForName(name)})
                         };
                         data.addAttachment(space.homepage.id, formData, function (response) {
-                        }, error);
+                        }, error)
                     }
-                });
+                })
             }
-
         }
 
         /**
@@ -534,7 +521,7 @@ define([
             if (name.endsWith(".png"))return "Image/png";
             else if (name.endsWith(".svg"))return "Image/svg+xml";
             else if (name.endsWith(".gif"))return "Image/gif";
-            else if (name.endsWith(".jpg"))return "Image/jpg";
+            else if (name.endsWith(".jpg"))return "Image/jpg"
         }
 
         /**
@@ -558,9 +545,8 @@ define([
                         }
                     }
                 };
-
-                data.updatePage(space.homepage.id, updatePage);
-            });
+                data.updatePage(space.homepage.id, updatePage)
+            })
         }
 
         /**
@@ -580,8 +566,8 @@ define([
                     '</ri:attachment>' +
                     '</ac:image>';
                 return path;
-            }
-            return "";
+            };
+            return ""
         }
 
         /**
@@ -607,17 +593,17 @@ define([
                         html.find("object").replaceWith(makeImageHtmlStringFromXMLObject(html.find("object")));
                         html.find('a').each(function (index, entry) {
                             if (!(/^https?:\/\//i.test($(entry).attr('href')))) {
-                                $(entry).attr('href', "");
+                                $(entry).attr('href', "")
                             }
                         });
-                        page.body.storage.value = html.html().replace("\t", "");
+                        page.body.storage.value = html.html().replace("\t", "")
                     }
                 }
                 page.body.storage.value += specif.getAttributesAsHtmlStringForObject(object);
                 page.body.storage.value += specif.getRelationsAsHtmlStringForObject(object);
-                page.title = specif.makePageTitle(object);
-            }
-            return page;
+                page.title = specif.makePageTitle(object)
+            };
+            return page
         }
 
         /**
@@ -635,11 +621,11 @@ define([
                 indexNumbers[object.id] = {index: index + 1, parent: parentID};
                 while (indexNumbers[parentID]) {
                     num = indexNumbers[parentID].index + "." + num;
-                    parentID = indexNumbers[parentID].parent;
-                }
-                return num + (index + 1) + " ";
-            }
-            else return "";
+                    parentID = indexNumbers[parentID].parent
+                };
+                return num + (index + 1) + " "
+            };
+            else return ""
         }
 
         /**
@@ -671,13 +657,12 @@ define([
                 }, function (err) {
                     console.log(page);
                     console.log(err);
-                    error(err);
-                });
+                    error(err)
+                })
             } else {
-                createHierarchies(rootID, node, index + 1);
+                createHierarchies(rootID, node, index + 1)
             }
         }
-
 
         /**
          *This function updates each unnumbered page to change its order to the order of the specIF file.
@@ -705,17 +690,16 @@ define([
                     progress++;
                     if (progress === maxProgress) success();
                     AJS.progressBars.update("#progress-bar", progress / maxProgress);
-                    recursiveStepForHierarchicalOrder(rootID, node, index, createdPage);
+                    recursiveStepForHierarchicalOrder(rootID, node, index, createdPage)
                 }, function (err) {
                     error(err)
-                });
+                })
             } else {
                 progress++;
                 if (progress === maxProgress) success();
                 AJS.progressBars.update("#progress-bar", progress / maxProgress);
-                recursiveStepForHierarchicalOrder(rootID, node, index, createdPage);
+                recursiveStepForHierarchicalOrder(rootID, node, index, createdPage)
             }
-
         }
 
         /**
@@ -727,17 +711,14 @@ define([
          * @param createdPage The returned page object from the create content rest api call
          * @param createdPage
          */
-
         function recursiveStepForHierarchicalOrder(rootID, node, index, createdPage) {
             if (node.nodes[index].nodes.length > 0) {
                 createHierarchies(createdPage.id, node.nodes[index], 0);
-            }
-            createHierarchies(rootID, node, index + 1);
-        }
-
+            };
+            createHierarchies(rootID, node, index + 1)
+        };
         return {
             init: init
-        };
+        }
     }
-)
-;
+);
