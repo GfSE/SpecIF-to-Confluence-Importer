@@ -134,7 +134,7 @@ define([
                                         if (id !== "0") {
                                             offset = Math.atan(clusterPosition.y / clusterPosition.x);
                                             if (clusterPosition.x < 0) offset += Math.PI;
-                                            dist = 100;
+                                            dist = 100
                                         }
                                     } else {
                                         newPositions[id] = getNodePosition(
@@ -143,10 +143,10 @@ define([
                                             clusterPosition.x, clusterPosition.y,
                                             dist,
                                             offset);
-                                        i++;
+                                        i++
                                     }
                                 }
-                            }
+                            };
                             return newPositions;
                         }
                     };
@@ -186,7 +186,7 @@ define([
 
         /**
          * wraps a text after e specific number of chars
-         * @param str The Stringt that hast to be wrapped
+         * @param str the String to be wrapped
          * @returns {string} the wrapped string
          */
         function wrapText(str) {

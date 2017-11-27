@@ -11,7 +11,6 @@ define([
              jsZipUtils,
              specifCheck) {
 
-
     return function (path, i18n, callback, error) {
         /**
          * This Array holds all files extracted from the specIFZ zip File
@@ -62,7 +61,7 @@ define([
                 .then(parseSpecIFToJSON).catch(error)
                 .then(checkScheme).catch(error)
                 .then(checkConstraints).catch(error)
-                .then(callback);
+                .then(callback)
         }
 
         /**
@@ -70,7 +69,7 @@ define([
          * @returns bool
          */
         function checkConstraints() {
-             return specifCheck.checkConstraints(specif);
+             return specifCheck.checkConstraints(specif)
         }
 
         /**
@@ -78,7 +77,7 @@ define([
          * @returns {*}
          */
         function checkScheme() {
-            return specifCheck.checkSchema(specif);
+            return specifCheck.checkSchema(specif)
         }
 
         /**
@@ -90,7 +89,7 @@ define([
             zip.forEach(function (relativePath, file) {
                 if (file.dir === false) specifZ.push(file);
             });
-            return zip;
+            return zip
         }
 
         /**
@@ -110,8 +109,8 @@ define([
                 }
             }
             return zip.file(specJson.name).async("string").then(function (value) {
-                specif = JSON.parse(value);
-            });
+                specif = JSON.parse(value)
+            })
         }
 
         /**
@@ -122,7 +121,7 @@ define([
         function getIconForObjectType(type) {
             for (let i = 0; i < specif.objectTypes.length; i++)
                 if (specif.objectTypes[i].id === type)
-                    return specif.objectTypes[i].icon ? specif.objectTypes[i].icon + " " : "";
+                    return specif.objectTypes[i].icon ? specif.objectTypes[i].icon + " " : ""
         }
 
         /**
@@ -133,7 +132,7 @@ define([
          */
         function getObjectTitleForObjectID(id) {
             let object = getObjectForID(id);
-            return getIconForObjectType(object.objectType) + getObjectNameForObject(object);
+            return getIconForObjectType(object.objectType) + getObjectNameForObject(object)
         }
 
         /**
@@ -146,8 +145,8 @@ define([
                 if (titleAttributes.includes(object.attributes[n].title)) {
                     return cleanStringFromForbiddenChars(object.attributes[n].value);
                 }
-            }
-            return cleanStringFromForbiddenChars(object.title);
+            };
+            return cleanStringFromForbiddenChars(object.title)
         }
 
         /**
@@ -162,9 +161,9 @@ define([
             while (i--) {
                 let iC = str[i].charCodeAt(0);
                 if (iC < 65 || iC > 127 || (iC > 90 && iC < 97)) aRet[i] = '&#' + iC + ';';
-                else aRet[i] = str[i];
-            }
-            return aRet.join('');
+                else aRet[i] = str[i]
+            };
+            return aRet.join('')
         }
 
         /**
@@ -174,8 +173,8 @@ define([
          */
         function cleanStringHtmlToUniCode(str) {
             return str.replace(/&#([0-9]{1,3});/g, function (match, numStr) {
-                return String.fromCharCode(parseInt(numStr, 10));
-            });
+                return String.fromCharCode(parseInt(numStr, 10))
+            })
         }
 
         /**
@@ -189,7 +188,7 @@ define([
                 '<ac:plain-text-link-body>' +
                 '<![CDATA[' + cleanStringHtmlToUniCode(pageTitle) + ']]>' +
                 '</ac:plain-text-link-body>' +
-                '</ac:link>';
+                '</ac:link>'
         }
 
         /**
@@ -199,7 +198,7 @@ define([
          */
         function getObjectForID(id) {
             for (let i = 0; i < specif.objects.length; i++)
-                if (specif.objects[i].id === id) return specif.objects[i];
+                if (specif.objects[i].id === id) return specif.objects[i]
         }
 
         /**
@@ -226,8 +225,8 @@ define([
                         relations[relationType].targets.push(specif.relations[i].target.id);
                     }
                 }
-            }
-            return relations;
+            };
+            return relations
         }
 
         /**
@@ -245,7 +244,7 @@ define([
                         break;
                     }
                 }
-            }
+            };
             return type
         }
 
@@ -256,7 +255,7 @@ define([
          */
         function getValuesForEnumeratedDataType(dataType) {
             for (let i = 0; i < specif.dataTypes.length; i++)
-                if (specif.dataTypes[i].id === dataType) return specif.dataTypes[i].values;
+                if (specif.dataTypes[i].id === dataType) return specif.dataTypes[i].values
         }
 
         /**
@@ -270,8 +269,8 @@ define([
             if (values) {
                 for (let i = 0; i < values.length; i++)
                     if (values[i].id === value) return values[i].title;
-            }
-            return "";
+            };
+            return ""
         }
 
         /**
@@ -280,7 +279,7 @@ define([
          * @returns {string} the converted Date string
          */
         function getDateValueForDataTypeAndValue(value) {
-            return new Date(value).toLocaleString();
+            return new Date(value).toLocaleString()
         }
 
         /**
@@ -292,8 +291,8 @@ define([
         function getAttributeValueForTitle(object, title) {
             for (let i = 0; i < object.attributes.length; i++) {
                 if (object.attributes[i].title === title) return object.attributes[i].value;
-            }
-            return "no attribute " + title + " in " + object.id + " available.";
+            };
+            return "no attribute " + title + " in " + object.id + " available."
         }
 
         /**
@@ -303,8 +302,8 @@ define([
          */
         function dataTypeIsEnumerator(type) {
             return specif.dataTypes.some(function (entry) {
-                if (entry.id === type && entry.type === "xs:enumeration")return true;
-            });
+                if (entry.id === type && entry.type === "xs:enumeration")return true
+            })
         }
 
         /**
@@ -314,8 +313,8 @@ define([
          */
         function dataTypeIsDate(type) {
             return specif.dataTypes.some(function (entry) {
-                if (entry.id === type && entry.type === "xs:dateTime")return true;
-            });
+                if (entry.id === type && entry.type === "xs:dateTime")return true
+            })
         }
 
         /**
@@ -329,14 +328,12 @@ define([
                 if (specif.objectTypes[i].id == objectType) {
                     specif.objectTypes[i].attributeTypes.forEach(function (entry) {
                         if (!titleAttributes.includes(entry.title) &&
-                            !descriptionAttributes.includes(entry.title)) attributes.push(entry);
-                    });
+                            !descriptionAttributes.includes(entry.title)) attributes.push(entry)
+                    })
                 }
             }
             return attributes;
         }
-
-
 
         /**
          * returns a object for a given id
@@ -345,7 +342,7 @@ define([
          */
         function getSpecIFObjectForID(id) {
             for (let i = 0; i < specif.objects.length; i++)
-                if (specif.objects[i].id === id)  return specif.objects[i];
+                if (specif.objects[i].id === id)  return specif.objects[i]
         }
 
         /**
@@ -355,7 +352,7 @@ define([
          */
         function getRoot(index) {
             if (index) return specif.hierarchies[index];
-            return specif.hierarchies[0];
+            return specif.hierarchies[0]
         }
 
         /**
@@ -385,8 +382,8 @@ define([
                     }
 
                 }
-            }
-            return JSON.stringify(relationJson);
+            };
+            return JSON.stringify(relationJson)
         }
 
         /**
@@ -410,7 +407,7 @@ define([
             relationsDiv += '</div>';
             if ($.isEmptyObject(relations)) relationsDiv = "";
             else relationsDiv += '<p class="hidden">' + getStringifyJsonForRelations(relations, object) + '</p>';
-            return relationsDiv;
+            return relationsDiv
         }
 
         /**
@@ -423,11 +420,10 @@ define([
             let i = specif.relationTypes.length;
             while (i--) {
                 if (specif.relationTypes[i].id === type) {
-                    return specif.relationTypes[i].title;
+                    return specif.relationTypes[i].title
                 }
-
-            }
-            return relation.title;
+            };
+            return relation.title
         }
 
         /**
@@ -443,21 +439,20 @@ define([
                 let title = getRelationTitle(relation);
                 let middleSideDiv = '<ac:layout-cell><p id="middle" title ="' + title + '"><em>' + title + '</em></p></ac:layout-cell>';
                 let pageTitle = getObjectTitleForObjectID(object.id);
-                let unlinkedRelationObject = '<ac:layout-cell><p>' + pageTitle +
-                    '</p></ac:layout-cell>';
+                let unlinkedRelationObject = '<ac:layout-cell><p>' + pageTitle + '</p></ac:layout-cell>';
                 if (relations[relation.id].sources.length > 0) {
                     relationsDiv += '<ac:layout><ac:layout-section ac:type="three-equal" >' +
                         getAllLinkedRelationsOfOneSideAsHtmlStringForRelationsArray(relations[relation.id].sources)
-                        + middleSideDiv + unlinkedRelationObject + '</ac:layout-section></ac:layout><hr/>';
-                }
+                        + middleSideDiv + unlinkedRelationObject + '</ac:layout-section></ac:layout><hr/>'
+                };
                 if (relations[relation.id].targets.length > 0) {
                     relationsDiv += '<ac:layout><ac:layout-section ac:type="three-equal">' +
                         unlinkedRelationObject + middleSideDiv +
                         getAllLinkedRelationsOfOneSideAsHtmlStringForRelationsArray(relations[relation.id].targets) +
-                        '</ac:layout-section></ac:layout><hr/>';
+                        '</ac:layout-section></ac:layout><hr/>'
                 }
-            }
-            return relationsDiv;
+            };
+            return relationsDiv
         }
 
         /**
@@ -469,9 +464,9 @@ define([
             let side = '<ac:layout-cell>';
             relArray.forEach(function (entry) {
                 let pageTitle = getObjectTitleForObjectID(entry);
-                side += '<p>' + makeLinkToConfluencePage(pageTitle) + '</p>';
+                side += '<p>' + makeLinkToConfluencePage(pageTitle) + '</p>'
             });
-            return side + '</ac:layout-cell>';
+            return side + '</ac:layout-cell>'
         }
 
         /**
@@ -491,13 +486,13 @@ define([
                     value = getDateValueForDataTypeAndValue(value);
                 attributesDivLeft += '<p style="text-align: right;"><span style="color: rgb(102,102,153);"><em>' +
                     attribute.title + '</em></span></p>';
-                attributesDivRight += '<p>' + value + '</p>';
+                attributesDivRight += '<p>' + value + '</p>'
             });
             attributesDivLeft += "</ac:layout-cell>";
             attributesDivRight += "</ac:layout-cell>";
             return '<div><br/><br/><br/><h3>' + i18n.ATTRIBUTES + '</h3><hr/><ac:layout><ac:layout-section ac:type="two-equal">' +
                 attributesDivLeft + attributesDivRight +
-                '</ac:layout-section></ac:layout><hr/></div>';
+                '</ac:layout-section></ac:layout><hr/></div>'
         }
 
         /**
@@ -516,7 +511,7 @@ define([
             for (let i = 0; i < duplicatedPageTitles[simpleTitle] - 1; i++)
                 title += "\u200B";
 
-            return title;
+            return title
         }
 
         /**
@@ -530,7 +525,7 @@ define([
             node.nodes.forEach(function (entry) {
                 count += getHierarchieNodesSize(entry);
             });
-            return count + 1;
+            return count + 1
         }
 
         /**
@@ -538,7 +533,7 @@ define([
          * @returns {Array} The SpecIFZ File
          */
         function getFiles() {
-            return specifZ;
+            return specifZ
         }
 
         /**
@@ -546,7 +541,7 @@ define([
          * @returns {*} The specif json file
          */
         function getSpecIF() {
-            return specif;
+            return specif
         }
 
         /**
@@ -558,10 +553,10 @@ define([
             for (let n = 0; n < object.attributes.length; n++) {
                 if (object.attributes[n].title.match("SpecIF:Heading") ||
                     object.attributes[n].title.match("ReqIF.ChapterName")) {
-                    return true;
+                    return true
                 }
-            }
-            return false;
+            };
+            return false
         }
 
         /**
@@ -569,7 +564,7 @@ define([
          * @returns the title of the specif json file
          */
         function getTitle() {
-            return specif.title;
+            return specif.title
         }
 
         return {
@@ -583,12 +578,8 @@ define([
             getHierarchieNodesSize: getHierarchieNodesSize,
             isChapter: isChapter,
             getTitle: getTitle
-
         }
-
     };
-
-
 });
 
 
