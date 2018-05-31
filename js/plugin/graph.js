@@ -106,8 +106,8 @@ define([
                         network.getConnectedNodes(options.nodes[0]).length === 1 &&
                         !network.clustering.isCluster(options.nodes[0])) {
                         let pageID = nodes.get(options.nodes[0]).label.replace(/-\n/g, "").replace(/\n/g, " ");
-                        console.log(pageID);
-                        if (!pageID)return;
+//                      console.debug(pageID);
+                        if(!pageID) return;
                         d.getPageExpand("", "?title=" + pageID, function (res) {
                             let response = JSON.parse(res);
                             if (response.results.length) {
